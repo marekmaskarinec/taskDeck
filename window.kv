@@ -1,0 +1,65 @@
+<MyGrid>
+
+    addTextBox: addInput
+    priorityBox: priorSpinner
+    addButton: addButton
+    buttonDid: didItButton
+    noteLabel: noteLabel
+    buttonLater: doLaterButton
+
+    AnchorLayout:
+        cols: 1
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 3
+            size: root.width, 40           
+            TextInput:
+                multiline: False
+                size_hint_y: None
+                height: 40
+                id: addInput
+            Spinner:
+                text: "10"
+                values: "10","9","8","7","6","5","4","3","2","1"
+                size_hint_y: None
+                height: 40
+                id:priorSpinner
+            Button:
+                text: "+"
+                size_hint_y: None
+                height: 40
+                id:addButton
+
+        GridLayout:
+            cols:3
+            size: root.width, root.height-40
+
+            Button:
+                text: "DID IT"
+                id: didItButton
+                background_normal: ''
+                background_color: 1, .3, .4, .85
+            Label:
+                text:"Note"
+                id: noteLabel
+                bcolor: 1, .3, .4, .85
+                canvas.before:
+                    Color:
+                        rgba: self.bcolor
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            Button:
+                background_normal: ''
+                background_color: 1, .3, .4, 0
+                text: "DO IT LATER"
+                id: doLaterButton
+                canvas.before:
+                    Color:
+                        rgba: (.4,.4,.4,1) if self.state=='normal' else (0,.7,.7,1)  # visual feedback of press
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [50,]
+                    
