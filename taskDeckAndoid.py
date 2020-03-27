@@ -24,37 +24,27 @@ class MyGrid(Widget):
     def __init__(self, **kwargs):
         super(MyGrid, self).__init__(**kwargs)
 
-
-        """
-        #add layer
-        self.addTextBox = TextInput(multiline= False)
-        self.addTextBox.size_hint_y = None
-        self.addTextBox.height = 40
-        self.add_widget(self.addTextBox)
-        self.priorityBox = Spinner(text="10", values=("10","9","8","7","6","5","4","3","2","1"))
-        self.priorityBox.size_hint_y = None
-        self.priorityBox.height = 40
-        self.add_widget(self.priorityBox)
-        self.addButton = Button(text="+")
-        self.addButton.size_hint_y = None
-        self.addButton.height = 40
-        self.addButton.bind(on_press=self.add)
-        self.add_widget(self.addButton)
-
-        #read layer
-        self.buttonDid = Button(text="DID IT")
-        self.buttonDid.bind(on_press=self.didIt)
-        self.add_widget(self.buttonDid)
-        self.noteLabel = Label(text="Note")
-        self.add_widget(self.noteLabel)
-        self.buttonLater = Button(text="DO IT LATER")
-        self.buttonLater.bind(on_press=self.doItLater)
-        self.add_widget(self.buttonLater)
-        """
-
         self.addButton.bind(on_press=self.add)
         self.buttonDid.bind(on_press=self.didIt)
         self.buttonLater.bind(on_press=self.doItLater)
+
+        self.aboutBt.bind(on_press=self.about)
+        self.showAllBt.bind(on_press=self.showAll)
+
+    def about(self, obj):
+        self.noteLabel.text = "By: Marek Maskarinec \n version: 0.1"
+
+    def showAll(self, obj):
+        conn = sqlite3.connect('cards.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM cards")
+        cards = c.fetchall()
+        if cards is not []:
+            for i in range(len(cards)):
+                self.noteLabel.text += cards[i][0] + "\n" + str(cards[i][1]) + "\n" + "--------" + "\n"
+        else:
+            self.noteLabel.text = "No notes"
+        conn.close()
 
     def add(self, obj):
         noteText = self.addTextBox.text
@@ -92,7 +82,7 @@ class MyGrid(Widget):
             c = conn.cursor()
             c.execute("SELECT * FROM cards WHERE priority=?", (priorToSearch,))
             recordRow = c.fetchone()
-            if recordRow is not None:    
+            if recordRow is not None:
                 c.execute("SELECT rowid, * FROM cards WHERE note=?", (recordRow[0],))
                 lastId = c.fetchone
             else:
@@ -107,8 +97,10 @@ class MyGrid(Widget):
                     else:
                         priorToSearch = 10
                         cycleNumber = cycleNumber + 1
-                        seenNotes = list()
+                        #seenNotes = list()
             else:
+                print(seenNotes)
+                print(lastId)
                 if lastId not in seenNotes:
                     print(recordRow)
                     self.noteLabel.text = recordRow[0]

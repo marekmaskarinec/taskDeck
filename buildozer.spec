@@ -4,10 +4,10 @@
 title = TaskDeck
 
 # (str) Package name
-package.name = taskdeckPreAlpha
+package.name = taskdeck
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = org.marekmaskarinec.taskdeck
 
 # (str) Source code where the main.py live
 source.dir = .

@@ -6,10 +6,30 @@
     buttonDid: didItButton
     noteLabel: noteLabel
     buttonLater: doLaterButton
+    aboutBt: aboutBt
+    showAllBt: showAllBt
+    settingsBt: settingsBt
 
     GridLayout:
         cols: 3
         size: root.width, root.height
+
+        Button:
+            text: "DID IT"
+            id: didItButton
+            background_normal: ''
+            background_color: 1, .3, .4, 0
+        Label:
+            text:"Note"
+            id: noteLabel
+            background_color: 1, .3, .4, 0
+            halign: 'center'
+
+        Button:
+            background_normal: ''
+            background_color: 1, .3, .4, 0
+            text: "DO IT LATER"
+            id: doLaterButton
 
         TextInput:
             multiline: False
@@ -24,7 +44,7 @@
             size_hint_y: None
             height: 40
             id:priorSpinner
-            background_color: 1, .3, .4, 0            
+            background_color: 1, .3, .4, 0
         Button:
             text: "+"
             size_hint_y: None
@@ -32,19 +52,22 @@
             id:addButton
             background_color: 1, .3, .4, 0
 
-        Button:
-            text: "DID IT"
-            id: didItButton
-            background_normal: ''
-            background_color: 1, .3, .4, 0
-        Label:
-            text:"Note"
-            id: noteLabel
-            background_color: 1, .3, .4, 0
 
         Button:
-            background_normal: ''
+            text: "about"
+            size_hint_y: None
+            height: 40
+            id:aboutBt
             background_color: 1, .3, .4, 0
-            text: "DO IT LATER"
-            id: doLaterButton
-                    
+        Button:
+            text: "show all"
+            size_hint_y: None
+            height: 40
+            id:showAllBt
+            background_color: 1, .3, .4, 0
+        Button:
+            text: "settings"
+            size_hint_y: None
+            height: 40
+            id:settingsBt
+            background_color: 1, .3, .4, 0
