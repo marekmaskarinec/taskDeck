@@ -43,6 +43,8 @@ class MyGrid(Widget):
         self.aboutBt.text = config.get("aboutButton", "ABOUT")
         self.settingsBt.text = config.get("settingsButton", "SETTINGS")
 
+        self.findNew(self)
+
 
     def about(self, obj):
         global index
@@ -116,6 +118,8 @@ class MyGrid(Widget):
 
         if len(cards) > 0:
             self.noteLabel.text = cards[index][0]
+        else:
+            self.noteLabel.text = "no notes"
         """global priorToSearch
         global seenNotes
         global lastId
